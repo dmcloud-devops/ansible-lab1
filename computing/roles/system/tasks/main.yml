@@ -1,0 +1,9 @@
+---
+
+ - name: Run apt-get update
+   apt:
+     update_cache: yes
+
+ - name: Rund apt-get upgrade
+   apt:
+     upgrade: yes

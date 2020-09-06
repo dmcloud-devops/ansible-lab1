@@ -1,0 +1,51 @@
+# Based on https://docs.docker.com/install/linux/docker-ce/ubuntu/
+#          https://docs.docker.com/compose/install/
+
+---
+ 
+ - name: Uninstall old versions
+   apt:
+     name: "{{ packages }}"
+     state: absent
+     vars:
+       packages:
+       - docker
+       - docker-engine
+       - docker.io
+       - containerd 
+       - runc
+   
+ - name: Install packages to allow apt to use a repository over HTTPS
+   apt:
+     name: "{{ packages }}"
+     vars:
+       packages:
+       - apt-transport-https
+       - ca-certificates 
+       - curl
+       - gnupg2
+       - software-properties-common
+   
+ - name: Add Docker’s official GPG key
+   apt_key:
+     url: https://download.docker.com/linux/ubuntu/gpg
+     state: present
+   
+ - name: Add Docker’s official repository
+   apt_repository:
+     repo: deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release | lower }} stable
+     state: present
+  
+ - name: Run apt-get update
+   apt:
+     update_cache: yes
+   
+ - name: Install the latest version of Docker CE
+   apt:
+     name: docker-ce 
+   
+ - name: Download Docker Compose
+   get_url:
+     url: "{{ docker_compose_url }}"
+     dest: "{{ docker_compose_path }}"
+     mode: '0750'
