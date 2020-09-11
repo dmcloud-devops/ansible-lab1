@@ -1,5 +1,7 @@
-node_exporter_version: 1.0.1
-node_exporter_url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/{{ node_exporter_name }}.tar.gz"
-node_exporter_path: /usr/local/bin/
-node_exporter_download_path: /tmp
-node_exporter_name: "node_exporter-{{ node_exporter_version }}.linux-amd64"
+---
+
+  node_exporter_version: 1.0.1
+  node_exporter_url: "https://github.com/prometheus/node_exporter/releases/download/v{{ node_exporter_version }}/{{ node_exporter_name }}.tar.gz"
+  node_exporter_path: /usr/local/bin/
+  node_exporter_download_path: /tmp
+  node_exporter_name: "node_exporter-{{ node_exporter_version }}.linux-amd64"

@@ -6,7 +6,7 @@
      dest: "{{ node_exporter_download_path }}"
      mode: '0750'
     
- - name: Unzip tar file
+ - name: Unzip tar file {{ node_exporter_name }}.tar.gz
    unarchive:
      src: "{{ node_exporter_download_path }}/{{ node_exporter_name }}.tar.gz"
      dest: "{{ node_exporter_download_path }}"
@@ -29,3 +29,8 @@
      enabled: yes
      daemon_reload: yes
      state: started
+
+ - name: Remove temp file {{ node_exporter_name }}.tar.gz
+   file:
+     path: "/tmp/{{ node_exporter_name }}.tar.gz"
+     state: absent
