@@ -1,0 +1,26 @@
+---
+ - name: Run Pre-Tasks
+   hosts: all
+   remote_user: ubuntu
+   become: yes
+   become_user: root
+   become_method: sudo
+   gather_facts: no
+   pre_tasks:
+     - name: Install Python
+       raw: test -e /usr/bin/python || (apt -y update && apt install -y python python-apt)
+       changed_when: False
+
+
+ - name: Configure server
+   hosts: all
+   remote_user: ubuntu
+   become: yes
+   become_user: root
+   become_method: sudo
+   roles:
+     - { role: system, when: system_deploy }
+     - { role: docker, when: docker_deploy }
+     - { role: nginx, when: nginx_deploy }
+     - { role: node_exporter, when: node_exporter_deploy }
+   
