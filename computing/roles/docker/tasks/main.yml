@@ -7,24 +7,24 @@
    apt:
      name: "{{ packages }}"
      state: absent
-     vars:
-       packages:
-       - docker
-       - docker-engine
-       - docker.io
-       - containerd 
-       - runc
+   vars:
+     packages:
+     - docker
+     - docker-engine
+     - docker.io
+     - containerd 
+     - runc
    
  - name: Install packages to allow apt to use a repository over HTTPS
    apt:
      name: "{{ packages }}"
-     vars:
-       packages:
-       - apt-transport-https
-       - ca-certificates 
-       - curl
-       - gnupg2
-       - software-properties-common
+   vars:
+     packages:
+     - apt-transport-https
+     - ca-certificates 
+     - curl
+     - gnupg2
+     - software-properties-common
    
  - name: Add Docker’s official GPG key
    apt_key:
