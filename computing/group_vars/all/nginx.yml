@@ -1,0 +1,6 @@
+---
+
+   nginx_sys_user: nginx
+   nginx_path: /home/nginx
+   nginx_volume_data: "{{ nginx_path }}/data"
+   nginx_deploy: false
