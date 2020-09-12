@@ -1,0 +1,11 @@
+version: '3.1' 
+services:   
+  nginx:     
+    container_name: nginx   
+    image: "nginx:1.18.0-alpine"
+    ports:
+     - "80:80"
+     - "443:443"
+    volumes:
+      - {{ nginx_volume_data }}:/usr/share/nginx/html
+    restart: always
