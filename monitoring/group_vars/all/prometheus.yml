@@ -5,3 +5,4 @@
    prometheus_path: /home/prometheus
    prometheus_volume_data: "{{ prometheus_path }}/data"
    prometheus_volume_config: "{{ prometheus_path }}/config"
+   prometheus_deploy: false
