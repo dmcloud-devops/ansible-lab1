@@ -1,0 +1,33 @@
+---
+ - name: Create Nginx group
+   group:
+     name: "{{ nginx_sys_user }}"
+     gid: 2000
+     state: present
+
+ - name: Add Nginx user
+   user:
+    name: "{{ nginx_sys_user }}"
+    group: "{{ nginx_sys_user }}"
+    uid: 2000
+    shell: /sbin/nologin
+    create_home: yes
+    home: "{{ nginx_path }}"
+
+ - name: Create directory
+   file: 
+    path: "{{ nginx_volume_data }}"
+    state: directory
+    owner: "{{ nginx_sys_user }}"
+    group: "{{ nginx_sys_user }}"
+    mode: 0755
+
+ - name: Copy docker-compose.yml
+   template:
+     src: docker-compose.yml.j2
+     dest: "{{ nginx_path }}/docker-compose.yml"
+
+ - name: Docker-compose up container
+   shell: docker-compose up -d
+   args:
+     chdir: "{{ nginx_path }}"
