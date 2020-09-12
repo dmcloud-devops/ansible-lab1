@@ -9,13 +9,11 @@
 
  - name: Create directory
    file: 
-    path: "{{ item }}"
+    path: "{{ grafana_volume_data }}"
     state: directory
     owner: "{{ grafana_sys_user }}"
     group: "{{ grafana_sys_user }}"
     mode: 0750
-   with_items:
-     - "{{ grafana_volume_data }}"
 
  - name: Copy docker-compose.yml
    template:
@@ -34,7 +32,7 @@
 
  - name: Wait Grafana Service wake up
    wait_for:
-     host: "{{ docker_host }}"
+     host: "{{ groups['server'][0] }}"
      port: "{{ grafana_external_port }}"
      delay: 10
      state: drained
@@ -47,7 +45,8 @@
      grafana_password: "{{ grafana_secutiry_admin_password }}"
      org_id: "1"
      ds_type: "prometheus"
-     url: "{{ prometheus_url }}"
+     url: "{{ prometheus_address }}"
+     
    when:
      - grafana_create_datasource
 
@@ -57,7 +56,7 @@
      grafana_user: "admin"
      grafana_password: "{{ grafana_secutiry_admin_password }}"
      state: present
-     uid: "{{ grafana_dashboard_uid }}"
+     slug: node-exporter-full
      overwrite: yes
      path: "{{ grafana_path }}/dashboard.json"
    when:
