@@ -4,6 +4,6 @@
    apt:
      update_cache: yes
 
- - name: Rund apt-get upgrade
+ - name: Run apt-get upgrade
    apt:
-     upgrade: yes
+     upgrade: dist
