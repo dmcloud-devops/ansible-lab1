@@ -1,0 +1,7 @@
+---
+
+   prometheus_external_port: 9000
+   prometheus_address: "{{ groups['server'][0] }}:{{ prometheus_external_port }}"
+   prometheus_path: /home/prometheus
+   prometheus_volume_data: "{{ prometheus_path }}/data"
+   prometheus_volume_config: "{{ prometheus_path }}/config"
