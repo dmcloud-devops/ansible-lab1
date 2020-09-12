@@ -1,0 +1,11 @@
+---
+ - name: Configure server
+   hosts: all
+   remote_user: ubuntu
+   become: yes
+   become_user: root
+   become_method: sudo
+   roles:
+     - { role: prometheus, when: prometheus_deploy }
+     - { role: grafana, when: grafana_deploy }
+   
