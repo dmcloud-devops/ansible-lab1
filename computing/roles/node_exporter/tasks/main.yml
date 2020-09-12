@@ -8,6 +8,7 @@
     
  - name: Unzip tar file {{ node_exporter_name }}.tar.gz
    unarchive:
+     remote_src: yes
      src: "{{ node_exporter_download_path }}/{{ node_exporter_name }}.tar.gz"
      dest: "{{ node_exporter_download_path }}"
 
