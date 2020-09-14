@@ -23,4 +23,5 @@
      - { role: docker, when: docker_deploy }
      - { role: nginx, when: nginx_deploy }
      - { role: node_exporter, when: node_exporter_deploy }
+     - { role: cadvisor, when: cadvisor_deploy }
    

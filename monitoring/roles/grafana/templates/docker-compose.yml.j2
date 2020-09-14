@@ -10,4 +10,4 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD={{ grafana_secutiry_admin_password }}
     volumes:
       - {{ grafana_volume_data }}:/var/lib/grafana
-    restart: always
+    restart: unless-stopped

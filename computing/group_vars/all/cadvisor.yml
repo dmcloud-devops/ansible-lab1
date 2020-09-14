@@ -1,0 +1,4 @@
+---
+
+  cadvisor_path: /home/cadvisor
+  cadvisor_deploy: false

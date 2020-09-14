@@ -1,0 +1,32 @@
+---
+ - name: Copy Json's dashboard
+   copy:
+     src: "{{ item.src }}"
+     dest: "{{ item.dest }}"
+   with_items:
+     - { src: node-exporter-full.json, dest: "{{ grafana_path }}/node-exporter-full.json" }
+     - { src: docker-and-system-monitoring.json, dest: "{{ grafana_path }}/docker-and-system-monitoring.json" }
+
+ - name: Create Prometheus datasource
+   grafana_datasource:
+     name: "Prometheus"
+     grafana_url: "http://{{ grafana_address }}"
+     grafana_user: "admin"
+     grafana_password: "{{ grafana_secutiry_admin_password }}"
+     org_id: "1"
+     ds_type: "prometheus"
+     url: "{{ prometheus_address }}"
+
+ - name: Create Dashboards
+   grafana_dashboard:
+     grafana_url: "http://{{ grafana_address }}"
+     grafana_user: "admin"
+     grafana_password: "{{ grafana_secutiry_admin_password }}"
+     state: present
+     slug: '{{ item.slug }}'
+     overwrite: yes
+     path: "{{ item.path }}"
+
+   with_items:
+     - { slug: node-exporter-full, path: "{{ grafana_path }}/node-exporter-full.json" }
+     - { slug: docker-and-system-monitoring, path: "{{ grafana_path }}/docker-and-system-monitoring.json" }

@@ -26,3 +26,7 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['{{ groups['server'][0] }}:9100']
+  - job_name: 'cAdvisor'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['{{ groups['server'][0] }}:8080']

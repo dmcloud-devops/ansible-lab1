@@ -8,4 +8,4 @@ services:
      - "443:443"
     volumes:
       - {{ nginx_volume_data }}:/usr/share/nginx/html
-    restart: always
+    restart: unless-stopped

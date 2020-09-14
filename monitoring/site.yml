@@ -8,4 +8,5 @@
    roles:
      - { role: prometheus, when: prometheus_deploy }
      - { role: grafana, when: grafana_deploy }
+     - { role: grafana_dashboard, when: grafana_create_datasource }
    

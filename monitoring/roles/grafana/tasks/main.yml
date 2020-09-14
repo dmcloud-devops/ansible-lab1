@@ -20,11 +20,6 @@
      src: docker-compose.yml.j2
      dest: "{{ grafana_path }}/docker-compose.yml"
 
- - name: Copy Json's dashboard
-   copy:
-     src: dashboard.json
-     dest: "{{ grafana_path }}/dashboard.json"
-
  - name: Docker-compose up container
    shell: docker-compose up -d
    args:
@@ -36,28 +31,3 @@
      port: "{{ grafana_external_port }}"
      delay: 10
      state: drained
-
- - name: Create Prometheus datasource
-   grafana_datasource:
-     name: "Prometheus"
-     grafana_url: "http://{{ grafana_address }}"
-     grafana_user: "admin"
-     grafana_password: "{{ grafana_secutiry_admin_password }}"
-     org_id: "1"
-     ds_type: "prometheus"
-     url: "{{ prometheus_address }}"
-     
-   when:
-     - grafana_create_datasource
-
- - name: Create default Dashboard
-   grafana_dashboard:
-     grafana_url: "http://{{ grafana_address }}"
-     grafana_user: "admin"
-     grafana_password: "{{ grafana_secutiry_admin_password }}"
-     state: present
-     slug: node-exporter-full
-     overwrite: yes
-     path: "{{ grafana_path }}/dashboard.json"
-   when:
-     - grafana_create_datasource

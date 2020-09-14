@@ -11,3 +11,7 @@ deploy_only_grafana:
 deploy_only_prometheus:
 	ansible-playbook site.yml -i inventory \
 	-e "prometheus_deploy=true"
+
+deploy_dashboards:
+	ansible-playbook site.yml -i inventory \
+	-e "grafana_create_datasource=true"

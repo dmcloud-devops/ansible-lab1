@@ -9,4 +9,4 @@ services:
     volumes:
       - {{ prometheus_volume_data }}:/prometheus
       - {{ prometheus_volume_config }}/prometheus.yml:/etc/prometheus/prometheus.yml
-    restart: always
+    restart: unless-stopped

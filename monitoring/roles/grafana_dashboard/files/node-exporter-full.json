@@ -13568,7 +13568,9 @@
     "schemaVersion": 22,
     "style": "dark",
     "tags": [
-      "linux"
+      "Linux",
+      "Node Exporter",
+      "Prometheus"
     ],
     "templating": {
       "list": [
